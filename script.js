@@ -41,20 +41,16 @@ const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close-btn');
 
 // Open image in lightbox when clicked
-document.querySelectorAll('.gallery-image a').forEach(item => {
+document.querySelectorAll('.portfolio-item').forEach(item => {
   item.addEventListener('click', function(e) {
     e.preventDefault();
-    lightbox.style.display = 'block';
-    lightboxImg.src = this.href;
-  });
-});
-
-document.querySelectorAll('.image-item img').forEach(img => {
-  img.addEventListener('click', function(e) {
-    e.stopPropagation();
-    console.log("Image clicked:", this.src); // TEST LINE
-    lightbox.style.display = 'flex';
-    lightboxImg.src = this.src;
+    const img = this.querySelector('img');
+    if (img) {
+      lightbox.style.display = 'flex';
+      lightbox.style.justifyContent = 'center';
+      lightbox.style.alignItems = 'center';
+      lightboxImg.src = img.src;
+    }
   });
 });
 
@@ -86,55 +82,88 @@ document.addEventListener("DOMContentLoaded", function() {
   const ctx = canvas.getContext('2d');
 
   let width, height;
-  let particles = [];
+  let mouse = { x: -1000, y: -1000 };
+  
+  // Track mouse coordinates to light up the grid
+  window.addEventListener('mousemove', (e) => {
+     mouse.x = e.clientX;
+     mouse.y = e.clientY;
+  });
+
+  // Remove highlight when mouse leaves the page
+  window.addEventListener('mouseout', () => {
+     mouse.x = -1000;
+     mouse.y = -1000;
+  });
+
+  const hexRadius = 35;
+  const hexWidth = Math.sqrt(3) * hexRadius;
+  const hexHeight = 2 * hexRadius;
+  const xOffset = hexWidth;
+  const yOffset = hexHeight * 0.75;
+  
+  let hexagons = [];
 
   function init() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-    particles = [];
-    // Generate floating dots
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1
-      });
+    hexagons = [];
+    
+    const cols = Math.ceil(width / xOffset) + 2;
+    const rows = Math.ceil(height / yOffset) + 2;
+
+    // Generate Hexagon Coordinates
+    for (let row = -1; row < rows; row++) {
+      for (let col = -1; col < cols; col++) {
+        const x = col * xOffset + (row % 2 !== 0 ? xOffset / 2 : 0);
+        const y = row * yOffset;
+        hexagons.push({ x, y, cx: x, cy: y });
+      }
     }
+  }
+
+  function drawHexagon(x, y, radius, opacity) {
+    ctx.beginPath();
+    for (let i = 0; i < 6; i++) {
+      const angle = (Math.PI / 3) * i - Math.PI / 6;
+      const px = x + radius * Math.cos(angle);
+      const py = y + radius * Math.sin(angle);
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.closePath();
+    ctx.strokeStyle = `rgba(204, 255, 0, ${opacity})`; // Accent color
+    ctx.lineWidth = 1;
+    ctx.stroke();
   }
 
   function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, width, height);
     
-    particles.forEach((p, i) => {
-      p.x += p.vx;
-      p.y += p.vy;
+    const time = Date.now() * 0.0005;
 
-      // Reverse direction when hitting the screen edge
-      if (p.x < 0 || p.x > width) p.vx *= -1;
-      if (p.y < 0 || p.y > height) p.vy *= -1;
+    hexagons.forEach(hex => {
+      // Creates a subtle continuous breathing/moving grid effect
+      const noise = Math.sin(time + hex.cx * 0.01) * Math.cos(time + hex.cy * 0.01);
+      const dx = hex.cx + noise * 10;
+      const dy = hex.cy + noise * 10;
 
-      ctx.fillStyle = 'rgba(204, 255, 0, 0.5)'; // Accent color #ccff00
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
+      // Proximity to mouse controls glow and size
+      const dist = Math.hypot(mouse.x - dx, mouse.y - dy);
+      const maxDist = 250;
+      
+      let opacity = 0.02 + (Math.abs(noise) * 0.03); // Faint background base
+      let radius = hexRadius * 0.5; // Base dormant size
 
-      // Draw connecting lines if particles are close
-      for (let j = i + 1; j < particles.length; j++) {
-        let dx = p.x - particles[j].x;
-        let dy = p.y - particles[j].y;
-        let dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(204, 255, 0, ${1 - dist/150})`;
-          ctx.lineWidth = 0.5;
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
+      // If the mouse gets close, light up and expand the hexagon
+      if (dist < maxDist) {
+        const factor = 1 - (dist / maxDist);
+        opacity += factor * 0.8;
+        radius += factor * 12;
       }
+
+      drawHexagon(dx, dy, radius, opacity);
     });
   }
 
