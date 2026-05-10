@@ -76,3 +76,71 @@ function toggleDesc(img) {
   const item = img.parentElement;
   item.classList.toggle("active");
 }
+
+// MOVING BACKGROUND EFFECT
+document.addEventListener("DOMContentLoaded", function() {
+  // Dynamically inject the canvas so you don't need to edit index.html
+  const canvas = document.createElement('canvas');
+  canvas.id = 'moving-bg';
+  document.body.prepend(canvas);
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let particles = [];
+
+  function init() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    particles = [];
+    // Generate floating dots
+    for (let i = 0; i < 60; i++) {
+      particles.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1
+      });
+    }
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    ctx.clearRect(0, 0, width, height);
+    
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Reverse direction when hitting the screen edge
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+
+      ctx.fillStyle = 'rgba(204, 255, 0, 0.5)'; // Accent color #ccff00
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Draw connecting lines if particles are close
+      for (let j = i + 1; j < particles.length; j++) {
+        let dx = p.x - particles[j].x;
+        let dy = p.y - particles[j].y;
+        let dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(204, 255, 0, ${1 - dist/150})`;
+          ctx.lineWidth = 0.5;
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    });
+  }
+
+  init();
+  animate();
+
+  // Resize canvas when window resizes
+  window.addEventListener('resize', init);
+});
