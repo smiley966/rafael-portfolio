@@ -4,253 +4,206 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>RAFAEL SAÑOZA | Portfolio</title>
+        <title>RAFAEL SAÑOZA | Home</title>
         
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
         
         <link rel="stylesheet" href="style.css">
         <link rel="icon" href="images/logo.png" type="image/png" sizes="16x16"> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <style>
+            .dake-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 5%;
+                background-color: var(--bg-primary);
+                border-bottom: 5px dashed var(--accent);
+                position: sticky;
+                top: 0;
+                z-index: 1000;
+            }
+            .dake-header nav a {
+                font-family: var(--font-display);
+                color: var(--accent);
+                text-decoration: none;
+                font-size: 24px;
+                letter-spacing: 2px;
+                margin: 0 15px;
+                transition: color 0.3s ease, transform 0.3s ease;
+                display: inline-block;
+            }
+            .dake-header nav a:hover {
+                color: #FFFFFF;
+                transform: translateY(-3px);
+            }
+            .dake-header .logo-link {
+                flex: 0;
+                display: flex;
+                justify-content: center;
+            }
+            .nav-left, .nav-right {
+                flex: 1;
+                display: flex;
+            }
+            .nav-right {
+                justify-content: flex-end;
+            }
+            
+            .dake-portfolio {
+                padding: 0; /* Leaves no space around the section */
+                height: calc(100vh - 95px);
+                display: flex;
+                align-items: stretch;
+                background-color: var(--bg-primary);
+                overflow: hidden; /* Prevents container from scrolling */
+                position: relative; /* Anchors the absolutely positioned headline */
+            }
+            
+            .dake-grid {
+                display: grid;
+                grid-template-columns: 1fr 1.5fr 1fr;
+                gap: 0; /* Leaves no space between grid columns */
+                width: 100%;
+                height: 100%;
+            }
+            
+            .dake-col {
+                display: flex;
+                flex-direction: column;
+                gap: 0; /* Leaves no space between stacked images */
+                height: 100%;
+                min-height: 0; /* Ensures flex children can shrink to fit */
+            }
+
+            .center-col {
+                /* No longer needs relative positioning here */
+            }
+            
+            .dake-item {
+                background-color: var(--accent);
+                overflow: hidden;
+                display: flex;
+                min-height: 0; /* Enables strict scaling */
+                position: relative; /* Anchors the headline to the specific image */
+            }
+            
+            .dake-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.4s ease, filter 0.4s ease;
+                filter: grayscale(10%) contrast(1.1);
+            }
+            
+            .dake-item:hover img {
+                transform: scale(1.05);
+                filter: grayscale(0%) contrast(1.2);
+            }
+            
+            .headline-box {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                pointer-events: none; /* Allows you to still hover over images underneath */
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .headline-box h1 {
+                font-family: var(--font-display);
+                font-size: 5.5vw;
+                line-height: 0.95;
+                letter-spacing: 3px;
+                margin: 0;
+                color: var(--bg-primary);
+                text-shadow: 3px 3px 0px var(--accent), -2px -2px 0px var(--accent), 2px -2px 0px var(--accent), -2px 2px 0px var(--accent), 2px 2px 0px var(--accent);
+            }
+            
+            /* Dynamic flex ratios to fill exactly 100% of the container height */
+            .tall { flex: 1.6; }
+            .base { flex: 1; }
+            .massive { flex: 2.5; }
+            .strip { flex: 0.8; }
+            .square { flex: 1.2; }
+            .horizontal { flex: 1; }
+            
+            @media (max-width: 900px) {
+                .dake-header {
+                    flex-direction: column;
+                    gap: 15px;
+                    padding: 15px;
+                }
+                .nav-left, .nav-right {
+                    justify-content: center;
+                    width: 100%;
+                }
+                .dake-grid {
+                    grid-template-columns: 1fr;
+                    height: auto;
+                }
+                .dake-portfolio {
+                    height: auto;
+                    min-height: 100vh;
+                }
+                .dake-item { min-height: 250px; }
+                .headline-box h1 { font-size: 7.5vw; text-shadow: 2px 2px 0px var(--accent), -1px -1px 0px var(--accent), 1px -1px 0px var(--accent), -1px 1px 0px var(--accent), 1px 1px 0px var(--accent); }
+                .headline-box p { font-size: 2.5vw !important; font-weight: 400 !important; text-shadow: 1px 1px 0px var(--accent), -1px -1px 0px var(--accent), 1px -1px 0px var(--accent), -1px 1px 0px var(--accent); }
+            }
+        </style>
     </head>
     
     <body>
         <div class="main">
-            <header>
-                <img src="images/logo.png" class="logo" alt="Logo">
-                
-                <input type="checkbox" id="menu-toggle">
-                <label for="menu-toggle" class="bx bx-menu" id="menu-icon"></label>
-
-                <nav class="buttons">
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#skills">Skills</a></li>
-                        <li><a href="#works">Works</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
+            <header class="dake-header">
+                <nav class="nav-left">
+                    <a href="index.html">HOME</a>
+                    <a href="about.html">ABOUT</a>
+                </nav>
+                <a href="index.html" class="logo-link"><img src="images/logo.png" class="logo" alt="Logo" style="width: 80px; height: auto;"></a>
+                <nav class="nav-right">
+                    <a href="projects.html">PROJECTS</a>
+                    <a href="contact.html">CONTACT</a>
                 </nav>
             </header>
             
-            <section id="home" class="hero"> 
-                <div class="hero-content">
-                    <div class="hero-left">
-                        <img src="images/circle.jpg" alt="preview" class="thumb animate" data-animate-delay="0.2s">
-                        <img src="images/s3.jpg" alt="preview" class="thumb small animate" data-animate-delay="0.3s">
+            <section class="dake-portfolio">
+                <div class="headline-box animate" data-animate-delay="0.2s">
+                    <h1>CRAFTING DIGITAL FUTURES</h1>
+                    <p style="font-size: 1.2vw; font-weight: 400; margin: 10px 0 0 0; letter-spacing: 4px; color: var(--bg-primary); text-shadow: 1px 1px 0px var(--accent), -1px -1px 0px var(--accent), 1px -1px 0px var(--accent), -1px 1px 0px var(--accent);">TRANSFORMING VISION INTO SEAMLESS REALITIES.</p>
+                </div>
+                <div class="dake-grid">
+                    <!-- Left Column -->
+                    <div class="dake-col">
+                        <div class="dake-item tall animate" data-animate-delay="0.1s"><img src="images/PIC4.jpg" alt="Artwork 1"></div>
+                        <div class="dake-item base animate" data-animate-delay="0.3s"><img src="images/PIC6.jpg" alt="Artwork 2"></div>
                     </div>
-                    <div class="hero-center">
-                        <h1 class="hero-title animate" data-animate-delay="0.2s">
-                            <span>BUILT FOR</span><br>
-                            <span>GROWTH</span>
-                        </h1>
-                        <p class="hero-sub animate" data-animate-delay="0.4s">ENGINEERING DIGITAL EXPERIENCES</p>
-                    </div>
-                    <div class="hero-right">
-                        <div class="device-frame animate" data-animate-delay="0.6s">
-                            <img src="images/s3.jpg" alt="device" class="device">
+
+                    <!-- Center Column -->
+                    <div class="dake-col center-col">
+                        <div class="dake-item massive animate" data-animate-delay="0.4s">
+                            <img src="images/PIC1.jpg" alt="Main Portrait">
                         </div>
+                        <div class="dake-item strip animate" data-animate-delay="0.5s"><img src="images/PIC10.jpg" alt="Artwork Strip"></div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="dake-col">
+                        <div class="dake-item square animate" data-animate-delay="0.3s"><img src="images/PIC9.jpg" alt="Artwork 3"></div>
+                        <div class="dake-item horizontal animate" data-animate-delay="0.5s"><img src="images/PIC7.jpg" alt="Artwork 4"></div>
                     </div>
                 </div>
             </section>
-
-            <section id="about" class="section-padding"> 
-                <div class="section-header text-center">
-                    <h2 class="section-title animate" data-animate-delay="0.1s">WHO AM I?</h2>
-                </div>
-                
-                <div class="about-grid">
-                    <div class="about-card animate" data-animate-delay="0.2s">
-                        <h3><i class='bx bx-user'></i> The Developer</h3>
-                        <p>Technology has been my playground since childhood. As an IT student at Pamantasan ng Lungsod ng Valenzuela, I am actively exploring the depths of software development. Whether I'm building predictive performance systems or leading my development team, my goal is to craft clean, secure, and responsive digital solutions.</p>
-                    </div>
-
-                    <div class="about-card animate" data-animate-delay="0.3s">
-                        <h3><i class='bx bxs-graduation'></i> Education</h3>
-                        <p>I built my academic foundation at Parada National High School under the General Academic Strand. Despite not being strictly tech-focused initially, my determination led me to pursue a Bachelor of Science in Information Technology. I am currently honing specialized knowledge in programming, system analysis, and UI/UX design.</p>
-                    </div>
-
-                    <div class="about-card animate" data-animate-delay="0.4s">
-                        <h3><i class='bx bx-shield-quarter'></i> Discipline & Leadership</h3>
-                        <p>I am a proud graduate of the Reserve Officers' Training Corps (ROTC) program. This transformative experience instilled deep values of discipline, leadership, and resilience—qualities I now apply directly to managing complex software projects and leading development teams.</p>
-                    </div>
-                </div>
-            </section>  
-
-            <section id="skills" class="section-padding">
-                <div class="section-header text-center">
-                    <h2 class="section-title animate" data-animate-delay="0.1s">TECH ARSENAL</h2>
-                    <p class="section-subtitle animate" data-animate-delay="0.2s">What I bring to the table.</p>
-                </div>
-
-            <div class="skills-container" style="background: var(--card-bg); border: 1px solid var(--border-light); padding: 50px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1);">
-                <div class="skills-wrapper" style="display: flex; flex-direction: column; gap: 50px;">
-                    
-                    <div class="skill-category animate" data-animate-delay="0.3s">
-                            <h3 style="color: var(--accent); margin-bottom: 30px; font-size: 26px; text-align: center; letter-spacing: 2px; text-transform: uppercase;">
-                                <i class="bx bx-brain" style="font-size: 36px; vertical-align: middle; margin-right: 8px;"></i> Core Skills
-                            </h3>
-                            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; flex-direction: column; gap: 5px;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Google Workspace
-                                    </strong> 
-                                    <span style="color: var(--text-secondary); font-size: 14px; margin-left: 32px;">Docs, Sheets, Gmail, Calendar</span>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; flex-direction: column; gap: 5px;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Technical
-                                    </strong> 
-                                    <span style="color: var(--text-secondary); font-size: 14px; margin-left: 32px;">HTML/CSS, JavaScript, PC Networking</span>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; flex-direction: column; gap: 5px;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Database & Backend
-                                    </strong> 
-                                    <span style="color: var(--text-secondary); font-size: 14px; margin-left: 32px;">Supabase, MySQL, SQL</span>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; align-items: center;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Computer & Digital Literacy
-                                    </strong>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; align-items: center;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Time Management
-                                    </strong>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; align-items: center;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Quick Learner & Adaptable
-                                    </strong>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; align-items: center;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Communication & Teamwork
-                                    </strong>
-                                </li>
-                                <li style="background: rgba(255,255,255,0.5); padding: 20px; border-radius: 10px; border-left: 4px solid var(--accent); display: flex; align-items: center;">
-                                    <strong style="color: var(--text-primary); font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="bx bx-check-circle" style="color: var(--accent); font-size: 24px;"></i> Creativity Skills
-                                    </strong>
-                                </li>
-                            </ul>
-                        </div>
-
-                    <hr style="border: none; border-top: 1px solid var(--border-light); width: 100%;">
-
-                    <div class="skill-category animate" data-animate-delay="0.4s">
-                            <h3 style="color: var(--accent); margin-bottom: 25px; font-size: 26px; text-align: center; letter-spacing: 2px; text-transform: uppercase;">
-                                <i class="bx bx-wrench" style="font-size: 36px; vertical-align: middle; margin-right: 8px;"></i> Tools
-                            </h3>
-                            
-                            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 35px;">
-                                <span style="background: rgba(255,255,255,0.5); padding: 10px 20px; border-radius: 20px; color: var(--text-primary); font-weight: 600; letter-spacing: 1px; font-size: 14px;">Figma</span>
-                                <span style="background: rgba(255,255,255,0.5); padding: 10px 20px; border-radius: 20px; color: var(--text-primary); font-weight: 600; letter-spacing: 1px; font-size: 14px;">Adobe Photoshop</span>
-                                <span style="background: rgba(255,255,255,0.5); padding: 10px 20px; border-radius: 20px; color: var(--text-primary); font-weight: 600; letter-spacing: 1px; font-size: 14px;">JIRA</span>
-                            </div>
-
-                            <div class="skill-icons" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
-                                <i class="fa-brands fa-html5" title="HTML5"></i>
-                                <i class="fa-brands fa-css3-alt" title="CSS3"></i>
-                                <i class="fa-brands fa-js" title="JavaScript"></i>
-                                <i class="fa-brands fa-figma" title="Figma"></i>
-                                <i class="fa-solid fa-database" title="Database"></i>
-                                <i class="fa-solid fa-network-wired" title="Networking"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="works" class="section-padding">
-                <div class="section-header text-center">
-                    <h2 class="section-title animate" data-animate-delay="0.1s">SELECTED WORKS</h2>
-                </div>
-
-                <div class="work-category animate" data-animate-delay="0.2s">
-                    <h3 class="category-title">Multimedia & UI/UX</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item"><img src="images/W1.png" alt="Work 1"><div class="overlay"><span>Conceptual Art</span></div></div>
-                        <div class="portfolio-item"><img src="images/W2.png" alt="Work 2"><div class="overlay"><span>Poster Design</span></div></div>
-                        <div class="portfolio-item"><img src="images/W3.png" alt="Work 3"><div class="overlay"><span>Portfolio Cover</span></div></div>
-                        <div class="portfolio-item"><img src="images/W4.png" alt="Work 4"><div class="overlay"><span>Cafe Ad</span></div></div>
-                    </div>
-                </div>
-
-                <div class="work-category animate" data-animate-delay="0.3s">
-                    <h3 class="category-title">Networking Simulations</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item"><img src="images/N1.jpg" alt="Net 1"><div class="overlay"><span>Subnetwork Clusters</span></div></div>
-                        <div class="portfolio-item"><img src="images/N2.jpg" alt="Net 2"><div class="overlay"><span>Routing Paths</span></div></div>
-                        <div class="portfolio-item"><img src="images/N4.jpg" alt="Net 4"><div class="overlay"><span>Linear Topology</span></div></div>
-                        <div class="portfolio-item"><img src="images/N6.jpg" alt="Net 6"><div class="overlay"><span>Overview Model</span></div></div>
-                    </div>
-                </div>
-
-				<div class="work-category" style="margin-top: 80px;">
-                    <h3 class="category-title">Game Development</h3>
-                    <p class="section-subtitle" style="margin-bottom: 20px; text-align: left;">Final project built using Java with custom assets.</p>
-                    
-                    <div class="video-grid">
-                        
-                        <div class="video-box" style="padding: 20px; border-radius: 12px; display: flex; flex-direction: column; height: 100%;">
-                            <video src="videos/G1.mp4" controls autoplay loop muted style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #DDD0C8; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
-                            <p class="video-caption" style="margin-top: auto; padding-top: 20px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Part 1: Gameplay Overview</p>
-                        </div>
-
-                        <div class="video-box" style="padding: 20px; border-radius: 12px; display: flex; flex-direction: column; height: 100%;">
-                            <video src="videos/taradon_demoreel.mp4" controls autoplay loop muted style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #DDD0C8; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
-                            <p class="video-caption" style="margin-top: auto; padding-top: 20px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Part 2: Boss Battle</p>
-                        </div>
-                        
-                    </div>
-                </div>
-
-                <div class="work-category" style="margin-top: 80px;">
-                    <h3 class="category-title">Human Computer Interaction Projects</h3>
-                    <p class="section-subtitle" style="margin-bottom: 20px; text-align: left;">UI design of my own inspired theme built using Figma.</p>
-                    <div class="video-box" style="padding: 30px; display: flex; align-items: center; justify-content: center;">
-                        <video src="videos/figmako.mp4" controls autoplay loop muted style="max-height: 550px; width: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
-                    </div>
-                </div>
-            </section>
-
-            <section id="demoreel" class="section-padding">     
-                <div class="video-box animate" data-animate-delay="0.2s">
-                    <h2 class="section-title text-center" style="font-size: 40px;">MY DEMO REEL</h2>
-                    <video controls autoplay loop muted src="videos/demoreelko.mp4" type="video/mp4"></video>
-                </div>
-            </section>
-
-            <section id="contact" class="section-padding">
-                <div class="contact-container animate" data-animate-delay="0.1s">
-                    <div class="contact-left">
-                        <h1 class="massive-text">PLUGGED INTO<br>THE FUTURE.</h1>
-                        <p>Let's build something extraordinary together. Book a call or drop a message below.</p>
-                    </div>
-                    
-                    <div class="contact-right">
-                        <form action="https://formsubmit.co/sanozarafael966@gmail.com" method="POST" class="sleek-form">
-                            <div class="input-row">
-                                <input type="text" name="name" placeholder="YOUR NAME" required>
-                                <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
-                            </div>
-                            <input type="text" name="subject" placeholder="SUBJECT">
-                            <textarea name="message" placeholder="TELL ME ABOUT YOUR PROJECT" rows="4" required></textarea>
-                            <input type="hidden" name="_captcha" value="false">
-                            <button type="submit" class="btn primary">INITIATE CONTACT <i class='bx bx-right-arrow-alt'></i></button>
-                        </form>
-                    </div>
-                </div>
-            </section>
-
-            <div id="lightbox" class="lightbox">
-                <span class="close-btn">&times;</span>
-                <img id="lightbox-img" src="" alt="Full Image">
-            </div>
 
             <footer> 
                 <div class="icons">
@@ -261,11 +214,10 @@
                 </div>
                 
                 <ul class="footerInfo">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#works">Works</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
                 
                 <p>&copy; Copyright 2026 Rafael Sañoza | All Rights Reserved</p>

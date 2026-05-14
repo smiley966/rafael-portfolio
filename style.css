@@ -1,16 +1,16 @@
 /* --- CUSTOM VARIABLES --- */
 :root {
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
-    --text-primary: #FFFFFF;
-    --text-secondary: rgba(255, 255, 255, 0.85);
-    --text-muted: rgba(255, 255, 255, 0.65);
-    --accent: #A0006D; /* Eggplant */
-    --accent-hover: #4A8BDF; /* Royal Blue */
-    --card-bg: rgba(160, 0, 109, 0.1);
-    --border-light: rgba(160, 0, 109, 0.2);
-    --font-primary: 'Inter', sans-serif;
-    --font-display: 'Anton', sans-serif;
+    --bg-primary: #D6E3B9; /* Pale Mint/Sage */
+    --bg-secondary: #77B6AC; /* Muted Teal */
+    --text-primary: #5E2137; /* Deep Burgundy */
+    --text-secondary: #AD2E4A; /* Raspberry Red */
+    --text-muted: rgba(94, 33, 55, 0.7); /* Deep Burgundy at 70% opacity */
+    --accent: #5E2137; /* Deep Burgundy */
+    --accent-hover: #AD2E4A; /* Raspberry Red */
+    --card-bg: rgba(119, 182, 172, 0.2); /* Muted Teal transparent */
+    --border-light: rgba(94, 33, 55, 0.3);
+    --font-primary: 'Montserrat', sans-serif;
+    --font-display: 'Bebas Neue', sans-serif;
     --transition-fast: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
@@ -35,6 +35,8 @@ body {
 
 .main {
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 /* --- NAVIGATION --- */
@@ -46,11 +48,9 @@ header {
     justify-content: space-between;
     position: sticky;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: var(--bg-primary);
     z-index: 1000;
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 5px dashed var(--accent);
     transition: background-color var(--transition-fast);
 }
 
@@ -75,13 +75,13 @@ ul li a {
     text-transform: uppercase;
     letter-spacing: 2px;
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--accent);
     transition: color var(--transition-fast), text-shadow var(--transition-fast);
 }
 
 ul li a:hover {
     color: var(--accent-hover);
-    text-shadow: 0 0 10px rgba(74, 139, 223, 0.2);
+    text-shadow: none;
 }
 
 #menu-toggle {
@@ -138,7 +138,7 @@ ul li a:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 }
 
@@ -257,7 +257,7 @@ ul li a:hover {
 
 .about-card:hover {
     transform: translateY(-10px);
-    background: rgba(160, 0, 109, 0.2);
+    background: rgba(142, 13, 60, 0.2);
     border-color: var(--accent);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
@@ -330,12 +330,24 @@ ul li a:hover {
 .skill-icons i:hover {
     color: var(--accent-hover);
     transform: scale(1.2) translateY(-5px);
-    filter: drop-shadow(0 10px 10px rgba(74, 139, 223, 0.3));
+    filter: drop-shadow(0 10px 10px rgba(239, 59, 51, 0.3));
 }
 
-/* --- WORKS SECTION --- */
+/* --- PROJECTS SECTION --- */
 .work-category {
     margin-bottom: 80px;
+}
+
+#projects .work-category:last-child {
+    margin-bottom: 20px;
+}
+
+#projects.section-padding {
+    padding-bottom: 0;
+}
+
+#demoreel.section-padding {
+    padding-top: 20px;
 }
 
 .category-title {
@@ -371,7 +383,7 @@ ul li a:hover {
 .portfolio-item .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(94, 33, 55, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -448,7 +460,7 @@ ul li a:hover {
 
 /* --- CONTACT SECTION --- */
 .futuristic-contact {
-    background: radial-gradient(circle at top right, rgba(160, 0, 109, 0.2), var(--bg-primary) 50%);
+    background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.2), var(--bg-primary) 50%);
 }
 
 .contact-container {
@@ -501,7 +513,7 @@ ul li a:hover {
 .sleek-form textarea:focus {
     outline: none;
     border-bottom-color: var(--accent-hover);
-    background-color: rgba(74, 139, 223, 0.1);
+    background-color: rgba(239, 59, 51, 0.1);
 }
 
 .sleek-form textarea {
@@ -513,7 +525,7 @@ ul li a:hover {
     padding: 18px 40px;
     border: none;
     background: var(--accent);
-    color: #FFFFFF;
+    color: var(--bg-primary);
     font-family: var(--font-primary);
     font-weight: 800;
     letter-spacing: 2px;
@@ -530,7 +542,6 @@ ul li a:hover {
 .btn:hover {
     background: var(--accent-hover);
     transform: translateX(10px);
-    color: #FFFFFF;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -589,7 +600,7 @@ footer {
 }
 
 .icons a {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-muted);
     font-size: 24px;
     transition: color var(--transition-fast), transform var(--transition-fast);
 }
@@ -669,12 +680,10 @@ footer p {
         top: 100%;
         left: 0;
         width: 100%;
-    background: rgba(0, 0, 0, 0.95);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
+        background: var(--bg-primary);
         padding: 20px;
         text-align: left;
-        border-bottom: 1px solid var(--border-light);
+        border-bottom: 5px dashed var(--accent);
     }
 
     ul li {

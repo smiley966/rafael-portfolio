@@ -14,11 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Set animation delay (optional based on custom data attribute)
         const delay = element.getAttribute('data-animate-delay') || '0s';
         element.style.animationDelay = delay;
-      } else {
-        // Remove animation class when element goes out of view
-        const element = entry.target;
-        element.classList.remove('in-view');
-        element.style.animationDelay = '0s';
       }
     });
   };
@@ -40,30 +35,31 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close-btn');
 
-// Open image in lightbox when clicked
-document.querySelectorAll('.portfolio-item').forEach(item => {
-  item.addEventListener('click', function(e) {
-    e.preventDefault();
-    const img = this.querySelector('img');
-    if (img) {
-      lightbox.style.display = 'flex';
-      lightbox.style.justifyContent = 'center';
-      lightbox.style.alignItems = 'center';
-      lightboxImg.src = img.src;
-    }
+if (lightbox && lightboxImg && closeBtn) {
+  // Open image in lightbox when clicked
+  document.querySelectorAll('.portfolio-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      const img = this.querySelector('img');
+      if (img) {
+        lightbox.style.display = 'flex';
+        lightbox.style.justifyContent = 'center';
+        lightbox.style.alignItems = 'center';
+        lightboxImg.src = img.src;
+      }
+    });
   });
-});
 
-
-// Close lightbox when X is clicked
-closeBtn.onclick = function() {
-  lightbox.style.display = 'none';
-}
-
-// Close lightbox when clicking outside the image
-lightbox.onclick = function(e) {
-  if (e.target === lightbox) {
+  // Close lightbox when X is clicked
+  closeBtn.onclick = function() {
     lightbox.style.display = 'none';
+  }
+
+  // Close lightbox when clicking outside the image
+  lightbox.onclick = function(e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
   }
 }
 
@@ -82,89 +78,169 @@ document.addEventListener("DOMContentLoaded", function() {
   const ctx = canvas.getContext('2d');
 
   let width, height;
+  let particles = [];
   let mouse = { x: -1000, y: -1000 };
-  
-  // Track mouse coordinates to light up the grid
+  let time = 0;
+
+  // Determine which page we are currently on
+  let pageType = 'home';
+  if (document.getElementById('about')) pageType = 'about';
+  else if (document.getElementById('projects')) pageType = 'projects';
+  else if (document.getElementById('contact')) pageType = 'contact';
+
+  // Track mouse for interactive effects
   window.addEventListener('mousemove', (e) => {
-     mouse.x = e.clientX;
-     mouse.y = e.clientY;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  // Remove highlight when mouse leaves the page
   window.addEventListener('mouseout', () => {
-     mouse.x = -1000;
-     mouse.y = -1000;
+    mouse.x = -1000;
+    mouse.y = -1000;
   });
-
-  const hexRadius = 35;
-  const hexWidth = Math.sqrt(3) * hexRadius;
-  const hexHeight = 2 * hexRadius;
-  const xOffset = hexWidth;
-  const yOffset = hexHeight * 0.75;
-  
-  let hexagons = [];
 
   function init() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
-    hexagons = [];
+    particles = [];
     
-    const cols = Math.ceil(width / xOffset) + 2;
-    const rows = Math.ceil(height / yOffset) + 2;
-
-    // Generate Hexagon Coordinates
-    for (let row = -1; row < rows; row++) {
-      for (let col = -1; col < cols; col++) {
-        const x = col * xOffset + (row % 2 !== 0 ? xOffset / 2 : 0);
-        const y = row * yOffset;
-        hexagons.push({ x, y, cx: x, cy: y });
+    if (pageType === 'home') {
+      const numParticles = Math.floor((width * height) / 6000);
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          radius: Math.random() * 3 + 1,
+          vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 1) * 0.5 - 0.2,
+          baseAlpha: Math.random() * 0.5 + 0.2,
+          color: Math.random() > 0.5 ? '94, 33, 55' : '173, 46, 74',
+          pulseSpeed: Math.random() * 0.05 + 0.01,
+          angle: Math.random() * Math.PI * 2
+        });
+      }
+    } else if (pageType === 'about') {
+      const numParticles = Math.floor((width * height) / 8000);
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          radius: Math.random() * 2 + 1,
+          vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8,
+          alpha: Math.random() * 0.8 + 0.2
+        });
+      }
+    } else if (pageType === 'projects') {
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          size: Math.random() * 15 + 5,
+          vx: (Math.random() - 0.5) * 1, vy: (Math.random() - 0.5) * 1,
+          angle: Math.random() * Math.PI * 2,
+          vAngle: (Math.random() - 0.5) * 0.02
+        });
+      }
+    } else if (pageType === 'contact') {
+      for (let i = 0; i < 20; i++) {
+        particles.push({
+          x: Math.random() * width, y: Math.random() * height,
+          r: Math.random() * 150 + 50,
+          vx: (Math.random() - 0.5) * 0.5, vy: (Math.random() - 0.5) * 0.5,
+          color: Math.random() > 0.5 ? '94, 33, 55' : '119, 182, 172'
+        });
       }
     }
-  }
-
-  function drawHexagon(x, y, radius, opacity) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-      const angle = (Math.PI / 3) * i - Math.PI / 6;
-      const px = x + radius * Math.cos(angle);
-      const py = y + radius * Math.sin(angle);
-      if (i === 0) ctx.moveTo(px, py);
-      else ctx.lineTo(px, py);
-    }
-    ctx.closePath();
-    ctx.strokeStyle = `rgba(74, 139, 223, ${opacity})`; // Royal Blue accent color
-    ctx.lineWidth = 1;
-    ctx.stroke();
   }
 
   function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, width, height);
-    
-    const time = Date.now() * 0.0005;
+    time += 0.02;
 
-    hexagons.forEach(hex => {
-      // Creates a subtle continuous breathing/moving grid effect
-      const noise = Math.sin(time + hex.cx * 0.01) * Math.cos(time + hex.cy * 0.01);
-      const dx = hex.cx + noise * 10;
-      const dy = hex.cy + noise * 10;
+    if (pageType === 'home') {
+      // Home: Floating Interactive Embers
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.angle += p.pulseSpeed;
+        
+        let dx = mouse.x - p.x, dy = mouse.y - p.y;
+        let dist = Math.hypot(dx, dy);
+        if (dist < 120) {
+          let force = (120 - dist) / 120;
+          p.x -= (dx / dist) * force * 2; p.y -= (dy / dist) * force * 2;
+        }
+        
+        if (p.x < 0) p.x = width; if (p.x > width) p.x = 0;
+        if (p.y < -10) p.y = height + 10; if (p.y > height + 10) p.y = -10;
 
-      // Proximity to mouse controls glow and size
-      const dist = Math.hypot(mouse.x - dx, mouse.y - dy);
-      const maxDist = 250;
-      
-      let opacity = 0.02 + (Math.abs(noise) * 0.03); // Faint background base
-      let radius = hexRadius * 0.5; // Base dormant size
-
-      // If the mouse gets close, light up and expand the hexagon
-      if (dist < maxDist) {
-        const factor = 1 - (dist / maxDist);
-        opacity += factor * 0.8;
-        radius += factor * 12;
+        const alpha = p.baseAlpha + Math.sin(p.angle) * 0.3;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color}, ${Math.max(0.1, alpha)})`;
+        ctx.shadowBlur = p.radius * 2;
+        ctx.shadowColor = `rgba(${p.color}, ${Math.max(0.1, alpha)})`;
+        ctx.fill();
+      });
+      ctx.shadowBlur = 0;
+    } 
+    else if (pageType === 'about') {
+      // About: Neural Network Constellation
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          let p1 = particles[i], p2 = particles[j];
+          let dist = Math.hypot(p1.x - p2.x, p1.y - p2.y);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `rgba(173, 46, 74, ${(1 - dist / 120) * 0.3})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
       }
-
-      drawHexagon(dx, dy, radius, opacity);
-    });
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(94, 33, 55, ${p.alpha})`;
+        ctx.fill();
+      });
+    } 
+    else if (pageType === 'projects') {
+      // Projects: Floating Triangles
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.angle += p.vAngle;
+        if (p.x < -p.size) p.x = width + p.size; if (p.x > width + p.size) p.x = -p.size;
+        if (p.y < -p.size) p.y = height + p.size; if (p.y > height + p.size) p.y = -p.size;
+        
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.beginPath();
+        ctx.moveTo(0, -p.size); ctx.lineTo(p.size, p.size); ctx.lineTo(-p.size, p.size);
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(94, 33, 55, 0.5)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        ctx.restore();
+      });
+    } 
+    else if (pageType === 'contact') {
+      // Contact: Floating Ambient Orbs
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -p.r) p.x = width + p.r;
+        if (p.x > width + p.r) p.x = -p.r;
+        if (p.y < -p.r) p.y = height + p.r;
+        if (p.y > height + p.r) p.y = -p.r;
+        
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.color}, 0.03)`;
+        ctx.fill();
+        ctx.strokeStyle = `rgba(${p.color}, 0.1)`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+    }
   }
 
   init();
@@ -172,4 +248,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Resize canvas when window resizes
   window.addEventListener('resize', init);
+});
+
+// IMAGE AUTO CYCLER
+document.addEventListener('DOMContentLoaded', () => {
+  const profileImg = document.querySelector('.profile-container img');
+  
+  if (profileImg) {
+    // Auto-cycle through the specified sequence
+    const images = ['images/PIC1.jpg', 'images/PIC4.jpg', 'images/PIC3.jpg', 'images/PIC6.jpg'];
+    let currentIndex = 0;
+
+    // Preload images to prevent flickering the first time it loads
+    images.forEach(src => {
+      const img = new Image();
+      img.src = src;
+    });
+    
+    // Automatically change the image every 2 seconds (2000 milliseconds)
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % images.length;
+      profileImg.src = images[currentIndex];
+    }, 2000);
+  }
 });

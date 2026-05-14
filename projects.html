@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>RAFAEL SAÑOZA | Projects</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+        
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="images/logo.png" type="image/png" sizes="16x16"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <div class="main">
+            <header>
+                <img src="images/logo.png" class="logo" alt="Logo">
+                <input type="checkbox" id="menu-toggle">
+                <label for="menu-toggle" class="bx bx-menu" id="menu-icon"></label>
+                <nav class="buttons">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <section id="projects" class="section-padding">
+                <div class="section-header text-center">
+                    <h2 class="section-title animate" data-animate-delay="0.1s">SELECTED PROJECTS</h2>
+                </div>
+                <div class="work-category animate" data-animate-delay="0.2s">
+                    <h3 class="category-title">Multimedia & UI/UX</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item"><img src="images/W1.png" alt="Work 1"><div class="overlay"><span>Conceptual Art</span></div></div>
+                        <div class="portfolio-item"><img src="images/W2.png" alt="Work 2"><div class="overlay"><span>Poster Design</span></div></div>
+                        <div class="portfolio-item"><img src="images/W3.png" alt="Work 3"><div class="overlay"><span>Portfolio Cover</span></div></div>
+                        <div class="portfolio-item"><img src="images/W4.png" alt="Work 4"><div class="overlay"><span>Cafe Ad</span></div></div>
+                        <div class="portfolio-item"><img src="images/W5.jpg" alt="Work 5"><div class="overlay"><span>Design Spread</span></div></div>
+                    </div>
+                </div>
+                <div class="work-category animate" data-animate-delay="0.3s">
+                    <h3 class="category-title">Networking Simulations</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item"><img src="images/N1.jpg" alt="Net 1"><div class="overlay"><span>Subnetwork Clusters</span></div></div>
+                        <div class="portfolio-item"><img src="images/N2.jpg" alt="Net 2"><div class="overlay"><span>Routing Paths</span></div></div>
+                        <div class="portfolio-item"><img src="images/N3.jpg" alt="Net 3"><div class="overlay"><span>Protocol Mapping</span></div></div>
+                        <div class="portfolio-item"><img src="images/N4.jpg" alt="Net 4"><div class="overlay"><span>Linear Topology</span></div></div>
+                        <div class="portfolio-item"><img src="images/N5.jpg" alt="Net 5"><div class="overlay"><span>Traffic Analysis</span></div></div>
+                        <div class="portfolio-item"><img src="images/N6.jpg" alt="Net 6"><div class="overlay"><span>Overview Model</span></div></div>
+                    </div>
+                </div>
+                <div class="work-category" style="margin-top: 80px;">
+                    <h3 class="category-title">Game Development</h3>
+                    <p class="section-subtitle" style="margin-bottom: 20px; text-align: left;">Final project built using Java with custom assets.</p>
+                    <div class="video-grid">
+                        <div class="video-box" style="padding: 20px; border-radius: 12px; display: flex; flex-direction: column; height: 100%;">
+                            <video src="videos/G1.mp4" controls autoplay loop muted style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #DDD0C8; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
+                            <p class="video-caption" style="margin-top: auto; padding-top: 20px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Part 1: Gameplay Overview</p>
+                        </div>
+                        <div class="video-box" style="padding: 20px; border-radius: 12px; display: flex; flex-direction: column; height: 100%;">
+                            <video src="videos/taradon_demoreel.mp4" controls autoplay loop muted style="width: 100%; aspect-ratio: 16/9; object-fit: cover; background-color: #DDD0C8; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
+                            <p class="video-caption" style="margin-top: auto; padding-top: 20px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; text-align: center;">Part 2: Boss Battle</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="work-category" style="margin-top: 80px;">
+                    <h3 class="category-title">Human Computer Interaction Projects</h3>
+                    <p class="section-subtitle" style="margin-bottom: 20px; text-align: left;">UI design of my own inspired theme built using Figma.</p>
+                    <div class="video-box" style="padding: 30px; display: flex; align-items: center; justify-content: center;">
+                        <video src="videos/figmako.mp4" controls autoplay loop muted style="max-height: 550px; width: auto; max-width: 100%; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);"></video>
+                    </div>
+                </div>
+            </section>
+
+            <section id="demoreel" class="section-padding">     
+                <div class="video-box animate" data-animate-delay="0.2s">
+                    <h2 class="section-title text-center" style="font-size: 40px;">MY DEMO REEL</h2>
+                    <video controls autoplay loop muted src="videos/demoreelko.mp4" type="video/mp4"></video>
+                </div>
+            </section>
+
+            <div id="lightbox" class="lightbox">
+                <span class="close-btn">&times;</span>
+                <img id="lightbox-img" src="" alt="Full Image">
+            </div>
+
+            <footer> 
+                <div class="icons">
+                    <a href="https://www.instagram.com/smiley_itoh/" target="_blank"><i class='bx bxl-instagram'></i></a>
+                    <a href="https://www.facebook.com/10110010r" target="_blank"><i class='bx bxl-facebook'></i></a>
+                    <a href="#" target="_blank"><i class='bx bxl-telegram'></i></a>
+                    <a href="https://discord.gg/eb5TERyN" target="_blank"><i class='bx bxl-discord'></i></a>
+                </div>
+                
+                <ul class="footerInfo">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <p>&copy; Copyright 2026 Rafael Sañoza | All Rights Reserved</p>
+            </footer>
+        </div>
+        <script src="script.js"></script>
+    </body>         
+</html>
