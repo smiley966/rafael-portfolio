@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", function() {
       else ctx.lineTo(px, py);
     }
     ctx.closePath();
-    ctx.strokeStyle = `rgba(204, 255, 0, ${opacity})`; // Accent color
+    ctx.strokeStyle = `rgba(74, 139, 223, ${opacity})`; // Royal Blue accent color
     ctx.lineWidth = 1;
     ctx.stroke();
   }

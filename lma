@@ -1,14 +1,14 @@
 /* --- CUSTOM VARIABLES --- */
 :root {
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
+    --bg-primary: #1A1A1A;
+    --bg-secondary: #009B4D;
     --text-primary: #FFFFFF;
     --text-secondary: rgba(255, 255, 255, 0.85);
     --text-muted: rgba(255, 255, 255, 0.65);
-    --accent: #A0006D; /* Eggplant */
-    --accent-hover: #4A8BDF; /* Royal Blue */
-    --card-bg: rgba(160, 0, 109, 0.1);
-    --border-light: rgba(160, 0, 109, 0.2);
+    --accent: #FFCC00;
+    --accent-hover: #FFFFFF;
+    --card-bg: rgba(0, 155, 77, 0.15);
+    --border-light: rgba(0, 155, 77, 0.3);
     --font-primary: 'Inter', sans-serif;
     --font-display: 'Anton', sans-serif;
     --transition-fast: 0.3s ease;
@@ -46,9 +46,9 @@ header {
     justify-content: space-between;
     position: sticky;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(26, 26, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     z-index: 1000;
     border-bottom: 1px solid var(--border-light);
     transition: background-color var(--transition-fast);
@@ -80,8 +80,8 @@ ul li a {
 }
 
 ul li a:hover {
-    color: var(--accent-hover);
-    text-shadow: 0 0 10px rgba(74, 139, 223, 0.2);
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(15, 252, 190, 0.4);
 }
 
 #menu-toggle {
@@ -92,7 +92,7 @@ ul li a:hover {
     display: none;
     font-size: 30px;
     cursor: pointer;
-    color: var(--text-muted);
+    color: var(--text-primary);
     transition: color var(--transition-fast);
 }
 
@@ -107,8 +107,8 @@ ul li a:hover {
 
 .dark-bg {
     background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
 }
 
 .text-center {
@@ -155,7 +155,7 @@ ul li a:hover {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 80px 80px;
     pointer-events: none;
     z-index: 0;
@@ -184,7 +184,7 @@ ul li a:hover {
     border-radius: 8px;
     filter: grayscale(50%);
     transition: filter var(--transition-fast), transform var(--transition-fast);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 .thumb:hover {
@@ -208,7 +208,7 @@ ul li a:hover {
     line-height: 0.85;
     color: var(--text-primary);
     margin: 0;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
 }
 
 .hero-sub {
@@ -225,12 +225,12 @@ ul li a:hover {
     border-radius: 12px;
     transform: rotate(2deg);
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 15px 40px rgba(15, 252, 190, 0.2);
 }
 
 .hero-right .device-frame:hover {
     transform: rotate(0deg) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 50px rgba(15, 252, 190, 0.3);
 }
 
 .device {
@@ -257,9 +257,9 @@ ul li a:hover {
 
 .about-card:hover {
     transform: translateY(-10px);
-    background: rgba(160, 0, 109, 0.2);
+    background: rgba(255, 255, 255, 0.2);
     border-color: var(--accent);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(15, 252, 190, 0.1);
 }
 
 .about-card h3 {
@@ -301,7 +301,7 @@ ul li a:hover {
 .progress-bar {
     width: 100%;
     height: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     overflow: hidden;
 }
@@ -309,7 +309,7 @@ ul li a:hover {
 .progress {
     height: 100%;
     background: var(--accent);
-    box-shadow: 0 0 15px var(--accent);
+    box-shadow: 0 0 15px rgba(15, 252, 190, 0.6);
     border-radius: 10px;
 }
 
@@ -328,9 +328,9 @@ ul li a:hover {
 }
 
 .skill-icons i:hover {
-    color: var(--accent-hover);
+    color: var(--accent);
     transform: scale(1.2) translateY(-5px);
-    filter: drop-shadow(0 10px 10px rgba(74, 139, 223, 0.3));
+    filter: drop-shadow(0 10px 10px rgba(15, 252, 190, 0.3));
 }
 
 /* --- WORKS SECTION --- */
@@ -358,7 +358,7 @@ ul li a:hover {
     overflow: hidden;
     cursor: pointer;
     aspect-ratio: 16/9;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 .portfolio-item img {
@@ -371,7 +371,7 @@ ul li a:hover {
 .portfolio-item .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(16, 110, 190, 0.85);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -381,7 +381,7 @@ ul li a:hover {
 
 .portfolio-item:hover img {
     transform: scale(1.1);
-    filter: brightness(0.4);
+    filter: brightness(0.6);
 }
 
 .portfolio-item:hover .overlay {
@@ -389,7 +389,7 @@ ul li a:hover {
 }
 
 .overlay span {
-    color: var(--accent-hover);
+    color: var(--accent);
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -410,7 +410,7 @@ ul li a:hover {
 .video-wrapper video {
     width: 100%;
     border-radius: 8px;
-    border: 1px solid rgba(50, 50, 50, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     transition: border-color var(--transition-fast);
 }
 
@@ -436,19 +436,19 @@ ul li a:hover {
 .video-box video {
     width: 100%;
     border-radius: 12px;
-    border: 1px solid rgba(50, 50, 50, 0.1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2);
     transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
 }
 
 .video-box:hover video {
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-    border-color: rgba(50, 50, 50, 0.3);
+    box-shadow: 0 25px 60px rgba(15, 252, 190, 0.15);
+    border-color: rgba(15, 252, 190, 0.3);
 }
 
 /* --- CONTACT SECTION --- */
 .futuristic-contact {
-    background: radial-gradient(circle at top right, rgba(160, 0, 109, 0.2), var(--bg-primary) 50%);
+    background: radial-gradient(circle at top right, rgba(15, 252, 190, 0.15), #106EBE 50%);
 }
 
 .contact-container {
@@ -500,8 +500,8 @@ ul li a:hover {
 .sleek-form input:focus,
 .sleek-form textarea:focus {
     outline: none;
-    border-bottom-color: var(--accent-hover);
-    background-color: rgba(74, 139, 223, 0.1);
+    border-bottom-color: var(--accent);
+    background-color: rgba(255, 255, 255, 0.01);
 }
 
 .sleek-form textarea {
@@ -513,7 +513,7 @@ ul li a:hover {
     padding: 18px 40px;
     border: none;
     background: var(--accent);
-    color: #FFFFFF;
+    color: #106EBE;
     font-family: var(--font-primary);
     font-weight: 800;
     letter-spacing: 2px;
@@ -528,10 +528,9 @@ ul li a:hover {
 }
 
 .btn:hover {
-    background: var(--accent-hover);
+    background: var(--text-primary);
     transform: translateX(10px);
-    color: #FFFFFF;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* --- LIGHTBOX --- */
@@ -544,7 +543,7 @@ ul li a:hover {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
+    background-color: rgba(16, 110, 190, 0.95);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
 }
@@ -555,14 +554,14 @@ ul li a:hover {
     max-height: 85vh;
     margin: 0 auto;
     border-radius: 4px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
 }
 
 .close-btn {
     position: absolute;
     top: 30px;
     right: 50px;
-    color: var(--text-muted);
+    color: var(--text-primary);
     font-size: 50px;
     cursor: pointer;
     transition: color var(--transition-fast), transform var(--transition-fast);
@@ -576,7 +575,7 @@ ul li a:hover {
 /* --- FOOTER --- */
 footer {
     padding: 60px 0 30px;
-    background-color: transparent;
+    background-color: #106EBE;
     text-align: center;
     border-top: 1px solid var(--border-light);
 }
@@ -595,7 +594,7 @@ footer {
 }
 
 .icons a:hover {
-    color: var(--accent-hover);
+    color: var(--accent);
     transform: translateY(-5px);
 }
 
@@ -669,7 +668,7 @@ footer p {
         top: 100%;
         left: 0;
         width: 100%;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(16, 110, 190, 0.95);
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
         padding: 20px;
